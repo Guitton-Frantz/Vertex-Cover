@@ -17,7 +17,6 @@ public class App {
         //Hash map of hash maps
         Map<Integer, Map<String, Integer>> results = new HashMap<Integer, Map<String, Integer>>();
         int countCol = 0;
-        int k = 10;
         int i = 10;
         while (i <= 2000) {
 
@@ -47,11 +46,10 @@ public class App {
             r1.put("dmoyG", getAverageDegree(finalGraph));
 
 
-            boundedSearchTree.minVC(graph2, k);
-
-            r1.put("VC 2 approx size", twoApprox.minVC(graph3).size());
-            r1.put("VC kernel size", kernel.minVC(graph1, k).size());
-            r1.put("VC bounded search tree size", graph2.vertexSet().size());
+            int twoApproxVC1 = twoApprox.minVC(graph3).size();
+            r1.put("VC 2 approx size", twoApproxVC1);
+            r1.put("VC kernel size", kernel.kernelization(graph1, twoApproxVC1/2, twoApproxVC1));
+            r1.put("VC bounded search tree size", boundedSearchTree.boundedSearchTree(graph2, twoApproxVC1/2, twoApproxVC1));
 
             double p2 = (double) 4 / i;
             graph = GraphGen.randomGraph((int) i, p2);
@@ -69,11 +67,11 @@ public class App {
             r2.put("dmoyG", getAverageDegree(finalGraph2));
 
             int twoApproxVcSize = twoApprox.minVC(graph3).size();
-            boundedSearchTree.minVC(graph2, k);
+            int twoApproxVC2 = twoApprox.minVC(graph3).size();
 
-            r2.put("VC 2 approx size", twoApprox.minVC(graph3).size());
-            r2.put("VC kernel size", kernel.minVC(graph1, k).size());
-            r2.put("VC bounded search tree size", graph2.vertexSet().size());
+            r2.put("VC 2 approx size", twoApproxVC2);
+            r2.put("VC kernel size", kernel.kernelization(graph1, twoApproxVC2/2, twoApproxVC2));
+            r2.put("VC bounded search tree size", boundedSearchTree.boundedSearchTree(graph2, twoApproxVC2/2, twoApproxVC2));
 
 
             double p3 = (double) 5 / i;
@@ -91,11 +89,11 @@ public class App {
             r3.put("deltaG", deltaG3);
             r3.put("dmoyG", getAverageDegree(finalGraph3));
 
-            boundedSearchTree.minVC(graph2, k);
+            int twoApproxVC3 = twoApprox.minVC(graph3).size();
 
-            r3.put("VC 2 approx size", twoApprox.minVC(graph3).size());
-            r3.put("VC kernel size", kernel.minVC(graph1, k).size());
-            r3.put("VC bounded search tree size", graph2.vertexSet().size());
+            r3.put("VC 2 approx size", twoApproxVC3);
+            r3.put("VC kernel size", kernel.kernelization(graph1, twoApproxVC3/2, twoApproxVC3));
+            r3.put("VC bounded search tree size", boundedSearchTree.boundedSearchTree(graph2, twoApproxVC3/2, twoApproxVC3));
 
             double p4 = 0.1;
             graph = GraphGen.randomGraph((int) i, p4);
@@ -112,11 +110,11 @@ public class App {
             int deltaG4 = getMaxDegree(finalGraph4);
             r4.put("deltaG", deltaG4);
             r4.put("dmoyG", getAverageDegree(finalGraph4));
-            boundedSearchTree.minVC(graph2, k);
+            int twoApproxVC4 = twoApprox.minVC(graph3).size();
 
-            r4.put("VC 2 approx size", twoApprox.minVC(graph3).size());
-            r4.put("VC kernel size", kernel.minVC(graph1, k).size());
-            r4.put("VC bounded search tree size", graph2.vertexSet().size());
+            r4.put("VC 2 approx size", twoApproxVC4);
+            r4.put("VC kernel size", kernel.kernelization(graph1, twoApproxVC4/2, twoApproxVC4));
+            r4.put("VC bounded search tree size", boundedSearchTree.boundedSearchTree(graph2, twoApproxVC4/2, twoApproxVC4));
 
             double p5 = 0.2;
             graph = GraphGen.randomGraph((int) i, p5);
@@ -133,11 +131,12 @@ public class App {
             int deltaG5 = getMaxDegree(finalGraph5);
             r5.put("deltaG", deltaG5);
             r5.put("dmoyG", getAverageDegree(finalGraph5));
-            boundedSearchTree.minVC(graph2, k);
 
-            r5.put("VC 2 approx size", twoApprox.minVC(graph3).size());
-            r5.put("VC kernel size", kernel.minVC(graph1, k).size());
-            r5.put("VC bounded search tree size", graph2.vertexSet().size());
+            int twoApproxVC5 = twoApprox.minVC(graph3).size();
+
+            r5.put("VC 2 approx size", twoApproxVC5);
+            r5.put("VC kernel size", kernel.kernelization(graph1, twoApproxVC5/2, twoApproxVC5));
+            r5.put("VC bounded search tree size", boundedSearchTree.boundedSearchTree(graph2, twoApproxVC5/2, twoApproxVC5));
 
             //create unique id for each row
             results.put(countCol, r1);

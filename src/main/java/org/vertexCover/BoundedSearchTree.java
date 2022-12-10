@@ -25,14 +25,19 @@ public class BoundedSearchTree {
     }
 
     /**
-     * boundedSearchTree algorithm to find the size of the vertex cover
+     * boundedSearchTree algorithm to find the size of the vertex cover tahnks to dichotomy
      * @param graph the graph
+     * @param lowerBound the lower bound
+     * @param upperBound the upper bound
      */
-    public int minVCSize(Graph<Integer, DefaultEdge> graph) {
-        int k = 0;
-        while (!minVC(graph, k)) {
-            k = k + 1;
+    public int boundedSearchTree(Graph<Integer, DefaultEdge> graph, int lowerBound, int upperBound) {
+        int k = (lowerBound + upperBound) / 2;
+        if (lowerBound == upperBound) {
+            return lowerBound;
+        } else if (minVC(graph, k)) {
+            return boundedSearchTree(graph, lowerBound, k);
+        } else {
+            return boundedSearchTree(graph, k + 1, upperBound);
         }
-        return k;
     }
 }
