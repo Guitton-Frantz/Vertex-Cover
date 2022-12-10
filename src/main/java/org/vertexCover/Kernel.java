@@ -53,6 +53,8 @@ public class Kernel {
      */
     public int kernelization(Graph<Integer, DefaultEdge> graph, int lowerBound, int upperBound) {
         int k = (lowerBound + upperBound) / 2;
+        System.out.println("kernelization lowerBound = " + lowerBound + " upperBound = " + upperBound + " k = " + k);
+        System.out.println("kernel k = " + k);
         if (lowerBound == upperBound) {
             return lowerBound;
         } else if (minVC(graph, k).size() <= k) {
